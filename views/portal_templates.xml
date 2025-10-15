@@ -88,7 +88,7 @@
   </template>
 
   <!-- PLAN DETAY -->
- <template id="portal_diet_plan" name="Diet: Plan Detail">
+ <template id="portal_plan_detail" name="Diet: Plan Detail">
   <t t-call="portal.portal_layout">
     <div class="container py-4">
       <a href="/my/diet" class="btn btn-link">← Geri</a>
