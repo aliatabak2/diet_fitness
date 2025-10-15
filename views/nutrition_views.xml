@@ -1,0 +1,81 @@
+<odoo>
+
+  <!-- LIST -->
+  <record id="view_diet_recipe_list" model="ir.ui.view">
+    <field name="name">diet.recipe.list</field>
+    <field name="model">diet.recipe</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name"/>
+        <field name="course"/>
+        <field name="kcal"/>
+        <field name="protein_g"/>
+        <field name="carbs_g"/>
+        <field name="fat_g"/>
+        <field name="is_simple"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- FORM -->
+  <record id="view_diet_recipe_form" model="ir.ui.view">
+    <field name="name">diet.recipe.form</field>
+    <field name="model">diet.recipe</field>
+    <field name="arch" type="xml">
+      <form string="Yemek Tarifi">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="course"/>
+            <field name="is_simple"/>
+            <field name="description"/>
+          </group>
+          <group string="Besin Değerleri">
+            <field name="use_manual_nutrition"/>
+            <field name="kcal"      readonly="not use_manual_nutrition"/>
+            <field name="protein_g" readonly="not use_manual_nutrition"/>
+            <field name="carbs_g"   readonly="not use_manual_nutrition"/>
+            <field name="fat_g"     readonly="not use_manual_nutrition"/>
+          </group>
+          <notebook>
+            <page string="Malzemeler">
+              <field name="line_ids">
+                <list editable="bottom">
+                  <field name="product_id"/>
+                  <field name="qty"/>
+                  <field name="uom_id"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- SEARCH -->
+  <record id="view_diet_recipe_search" model="ir.ui.view">
+    <field name="name">diet.recipe.search</field>
+    <field name="model">diet.recipe</field>
+    <field name="arch" type="xml">
+      <search string="Yemek Tarifleri">
+        <field name="name" filter_domain="['|', ('name','ilike', self), ('description','ilike', self)]"/>
+        <filter string="Salatalar"   name="flt_salad" domain="[('course','=','salad')]"/>
+        <filter string="Çorbalar"    name="flt_soup"  domain="[('course','=','soup')]"/>
+        <filter string="Yemekler"    name="flt_meal"  domain="[('course','=','meal')]"/>
+        <filter string="Yan Yiyecek" name="flt_side"  domain="[('course','=','side')]"/>
+        <separator/>
+        <filter string="Türe Göre Grupla" name="grp_course" context="{'group_by':'course'}"/>
+      </search>
+    </field>
+  </record>
+
+  <!-- ACTION -->
+  <record id="action_diet_recipes" model="ir.actions.act_window">
+    <field name="name">Yemek Tarifleri</field>
+    <field name="res_model">diet.recipe</field>
+    <field name="view_mode">list,form</field>
+    <field name="search_view_id" ref="view_diet_recipe_search"/>
+  </record>
+
+</odoo>

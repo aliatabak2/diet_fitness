@@ -1,0 +1,74 @@
+<odoo>
+  <!-- Portal ana sayfaya kısayol -->
+  <template id="portal_my_home_menu_diet" inherit_id="portal.portal_my_home" name="Diet Portal Tile">
+    <xpath expr="//div[contains(@class,'o_portal_my_home')]" position="inside">
+      <div class="row mt-3">
+        <div class="col-12 col-md-6 col-lg-4">
+          <a class="btn btn-primary w-100" href="/my/diet">Diyet Planım</a>
+        </div>
+      </div>
+    </xpath>
+  </template>
+
+  <!-- Üyesi olmayan portal kullanıcısı -->
+  <template id="portal_no_member" name="No Member">
+    <t t-call="portal.portal_layout">
+      <div class="container my-4">
+        <h3>Hesabınızda diyet profili bulunamadı</h3>
+        <p>Yönetici ile iletişime geçiniz.</p>
+      </div>
+    </t>
+  </template>
+
+  <!-- Plan görünümü -->
+  <template id="portal_diet_plan" name="Diet Plan Page">
+    <t t-call="portal.portal_layout">
+      <t t-set="plan" t-value="plan"/>
+      <div class="container my-4">
+        <h3>Günlük Plan — <t t-esc="plan.date"/></h3>
+        <p>Hedef kalori: <strong><t t-esc="plan.target_kcal or 0"/></strong></p>
+
+        <t t-if="plan">
+          <form t-att-action="'/my/diet/plan/%s/regen' % plan.id" method="post" class="mb-3">
+            <button type="submit" class="btn btn-outline-secondary">Öğünleri Yeniden Oluştur</button>
+          </form>
+
+          <table class="table table-striped">
+            <thead>
+              <tr><th>Öğün</th><th>Yemek</th><th>Kalori</th><th>Durum</th></tr>
+            </thead>
+            <tbody>
+              <t t-foreach="plan.meal_line_ids" t-as="ml">
+                <tr>
+                  <td><t t-esc="dict(breakfast='Kahvaltı',lunch='Öğle',dinner='Akşam',snack='Ara Öğün')[ml.meal_type]"/></td>
+                  <td><t t-esc="ml.recipe_id.name or '-'"/><br/><small t-esc="ml.note or ''"/></td>
+                  <td><t t-esc="int(ml.kcal or 0)"/></td>
+                  <td>
+                    <input type="checkbox" t-att-checked="ml.is_done and 'checked' or None"
+                           t-att-data-id="ml.id" class="o-diet-toggle"/>
+                  </td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+        </t>
+        <t t-if="not plan">
+          <div class="alert alert-warning">Bugün için plan oluşturulamadı.</div>
+        </t>
+      </div>
+
+      <!-- toggle JS -->
+      <script>
+        document.addEventListener('change', async (ev) => {
+          const el = ev.target;
+          if (!el.classList.contains('o-diet-toggle')) return;
+          const id = el.dataset.id;
+          await fetch('/my/diet/line/' + id + '/toggle', {
+            method: 'POST', headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({})
+          });
+        });
+      </script>
+    </t>
+  </template>
+</odoo>

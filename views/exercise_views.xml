@@ -1,0 +1,42 @@
+<odoo>
+  <record id="view_diet_exercise_list" model="ir.ui.view">
+    <field name="name">diet.exercise.list</field>
+    <field name="model">diet.exercise</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name"/>
+        <field name="duration_min"/>
+        <field name="reps"/>
+        <field name="sets"/>
+        <field name="kcal_burn"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_diet_exercise_form" model="ir.ui.view">
+    <field name="name">diet.exercise.form</field>
+    <field name="model">diet.exercise</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="description"/>
+          </group>
+          <group>
+            <field name="duration_min"/>
+            <field name="reps"/>
+            <field name="sets"/>
+            <field name="kcal_burn"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_diet_exercises" model="ir.actions.act_window">
+    <field name="name">Spor Hareketleri</field>
+    <field name="res_model">diet.exercise</field>
+    <field name="view_mode">list,form</field>
+  </record>
+</odoo>

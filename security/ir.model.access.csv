@@ -1,0 +1,18 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+diet_member_user,diet.member user,model_diet_member,base.group_user,1,1,1,0
+diet_member_log_user,diet.member.log user,model_diet_member_log,base.group_user,1,1,1,0
+diet_program_user,diet.program user,model_diet_program,base.group_user,1,1,1,0
+diet_recipe_user,diet.recipe user,model_diet_recipe,base.group_user,1,1,1,0
+diet_recipe_line_user,diet.recipe.line user,model_diet_recipe_line,base.group_user,1,1,1,0
+diet_exercise_user,diet.exercise user,model_diet_exercise,base.group_user,1,1,1,0
+diet_workout_user,diet.workout user,model_diet_workout,base.group_user,1,1,1,0
+diet_workout_line_user,diet.workout.line user,model_diet_workout_line,base.group_user,1,1,1,0
+diet_daily_plan_user,diet.daily.plan user,model_diet_daily_plan,base.group_user,1,1,1,0
+diet_daily_meal_line_user,diet.daily.meal.line user,model_diet_daily_meal_line,base.group_user,1,1,1,0
+
+diet_period_user,diet.period.plan user,model_diet_period_plan,diet_fitness.group_diet_user,1,1,1,0
+diet_period_manager,diet.period.plan manager,model_diet_period_plan,diet_fitness.group_diet_manager,1,1,1,1
+diet_period_all,diet.period.plan all,model_diet_period_plan,,1,1,1,1
+diet_daily_meal_line_user,diet.daily.meal.line user,model_diet_daily_meal_line,diet_fitness.group_diet_user,1,1,1,0
+diet_daily_meal_line_manager,diet.daily.meal.line manager,model_diet_daily_meal_line,diet_fitness.group_diet_manager,1,1,1,1
+

@@ -1,0 +1,37 @@
+<odoo>
+  <record id="view_diet_program_list" model="ir.ui.view">
+    <field name="name">diet.program.list</field>
+    <field name="model">diet.program</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name"/>
+        <field name="intensity"/>
+        <field name="deficit_min"/>
+        <field name="deficit_max"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_diet_program_form" model="ir.ui.view">
+    <field name="name">diet.program.form</field>
+    <field name="model">diet.program</field>
+    <field name="arch" type="xml">
+      <form string="Diyet Programı">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="intensity"/>
+            <field name="deficit_min"/>
+            <field name="deficit_max"/>
+            <field name="description"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="action_diet_programs" model="ir.actions.act_window">
+    <field name="name">Programlar</field>
+    <field name="res_model">diet.program</field>
+    <field name="view_mode">list,form</field>
+  </record>
+</odoo>

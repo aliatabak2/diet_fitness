@@ -1,0 +1,68 @@
+<odoo>
+  <record id="view_diet_daily_plan_list" model="ir.ui.view">
+    <field name="name">diet.daily.plan.list</field>
+    <field name="model">diet.daily.plan</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name"/>
+        <field name="member_id"/>
+        <field name="program_id"/>
+        <field name="date"/>
+        <field name="target_kcal"/>
+        <field name="state"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_diet_daily_plan_form" model="ir.ui.view">
+    <field name="name">diet.daily.plan.form</field>
+    <field name="model">diet.daily.plan</field>
+    <field name="arch" type="xml">
+      <form string="Günlük Plan">
+      
+       <header>
+  <button name="action_generate_meals"
+          type="object"
+          string="Öğünleri Oluştur"
+          class="btn-primary"
+          invisible="state != 'draft'"/>
+
+  <button name="action_generate_meals"
+          type="object"
+          string="Yeniden Oluştur"
+          invisible="state != 'ready'"/>
+
+  <field name="state" widget="statusbar" statusbar_visible="draft,ready,done"/>
+</header>
+        <sheet>
+          <group>
+            <field name="member_id" options="{'no_open': False}"/>
+            <field name="program_id"/>
+            <field name="date"/>
+            
+            <field name="target_kcal" readonly="1"/>
+            <field name="workout_id"/>
+          </group>
+          <notebook>
+            <page string="Öğünler">
+              <field name="meal_line_ids">
+                <list editable="bottom">
+                  <field name="meal_type"/>
+                  <field name="recipe_id"/>
+                  <field name="kcal" readonly="1"/>
+                  <field name="note"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_diet_daily_plans" model="ir.actions.act_window">
+    <field name="name">Günlük Planlar</field>
+    <field name="res_model">diet.daily.plan</field>
+    <field name="view_mode">list,form</field>
+  </record>
+</odoo>

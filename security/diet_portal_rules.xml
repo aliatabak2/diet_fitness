@@ -1,0 +1,49 @@
+<odoo>
+  <!-- kullanıcısı kendi üye kaydını görebilsin -->
+  <record id="diet_rule_member_portal_own" model="ir.rule">
+    <field name="name">Diet Member: Portal Own</field>
+    <field name="model_id" ref="model_diet_member"/>
+    <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    <field name="domain_force">[('partner_id','=',user.partner_id.id)]</field>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="0"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- sadece kendi planlarını görsün/yazsın -->
+  <record id="diet_rule_plan_portal_own" model="ir.rule">
+    <field name="name">Diet Plan: Portal Own</field>
+    <field name="model_id" ref="model_diet_daily_plan"/>
+    <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    <field name="domain_force">[('member_id.partner_id','=',user.partner_id.id)]</field>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- plan üzerinden sahiplik -->
+  <record id="diet_rule_meal_line_portal_own" model="ir.rule">
+    <field name="name">Diet Meal Line: Portal Own</field>
+    <field name="model_id" ref="model_diet_daily_meal_line"/>
+    <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    <field name="domain_force">[('plan_id.member_id.partner_id','=',user.partner_id.id)]</field>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="0"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+
+  <!-- günlük ağırlık logları -->
+  <record id="diet_rule_log_portal_own" model="ir.rule">
+    <field name="name">Diet Log: Portal Own</field>
+    <field name="model_id" ref="model_diet_member_log"/>
+    <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    <field name="domain_force">[('member_id.partner_id','=',user.partner_id.id)]</field>
+    <field name="perm_read" eval="1"/>
+    <field name="perm_write" eval="1"/>
+    <field name="perm_create" eval="1"/>
+    <field name="perm_unlink" eval="0"/>
+  </record>
+</odoo>

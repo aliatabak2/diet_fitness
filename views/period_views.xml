@@ -1,0 +1,70 @@
+<odoo>
+  <record id="view_diet_period_list" model="ir.ui.view">
+    <field name="name">diet.period.plan.list</field>
+    <field name="model">diet.period.plan</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name"/>
+        <field name="member_id"/>
+        <field name="date_start"/>
+        <field name="length_days"/>
+        <field name="cheat_day"/>
+        <field name="state"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_diet_period_form" model="ir.ui.view">
+    <field name="name">diet.period.plan.form</field>
+    <field name="model">diet.period.plan</field>
+    <field name="arch" type="xml">
+      <form string="Dönemlik Plan">
+        <header>
+          <button name="action_generate_period" type="object" string="14 Gün Üret" class="btn-primary" invisible="state!='draft'"/>
+          <field name="state" widget="statusbar" statusbar_visible="draft,ready,done"/>
+        </header>
+        <sheet>
+          <group>
+            <field name="member_id"/>
+            <field name="date_start"/>
+            <field name="length_days"/>
+            <field name="cheat_day"/>
+          </group>
+          <notebook>
+            <page string="Günlük Planlar">
+              <field name="daily_plan_ids" context="{'default_member_id': member_id}">
+  <list>
+    <field name="date"/>
+    <field name="target_kcal"/>
+    <field name="state"/>
+  </list>
+  <form>
+    <sheet>
+      <group>
+        <field name="date"/>
+        <field name="target_kcal"/>
+      </group>
+      <field name="meal_line_ids">
+        <list editable="bottom">
+          <field name="meal_type"/>
+          <field name="recipe_id"/>
+          <field name="kcal"/>
+        </list>
+      </field>
+    </sheet>
+  </form>
+</field>
+
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_diet_periods" model="ir.actions.act_window">
+    <field name="name">Dönemlik Planlar</field>
+    <field name="res_model">diet.period.plan</field>
+    <field name="view_mode">list,form</field>
+  </record>
+</odoo>

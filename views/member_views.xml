@@ -1,0 +1,69 @@
+<odoo>
+  <record id="view_diet_member_list" model="ir.ui.view">
+    <field name="name">diet.member.list</field>
+    <field name="model">diet.member</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="partner_id"/>
+        <field name="gender"/>
+        <field name="age"/>
+        <field name="height_cm"/>
+        <field name="weight_kg"/>
+        <field name="bmi"/>
+        <field name="body_fat_pct"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_diet_member_form" model="ir.ui.view">
+    <field name="name">diet.member.form</field>
+    <field name="model">diet.member</field>
+    <field name="arch" type="xml">
+      <form string="Üye">
+        <sheet>
+          <group>
+            <group>
+              <field name="partner_id"/>
+              <field name="program_id"/>
+              <field name="gender"/>
+              <field name="age"/>
+              <field name="height_cm"/>
+              <field name="activity_level"/>
+              <field name="weight_kg"/>
+              <field name="target_weight_kg"/>
+              <field name="activity_level"/>
+            </group>
+            <group>
+              <field name="waist_cm"/>
+              <field name="hip_cm"/>
+              <field name="neck_cm"/>
+              <field name="chest_cm"/>
+              <field name="bmi" readonly="1"/>
+              <field name="body_fat_pct" readonly="1"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="Evdeki Malzemeler">
+              <field name="pantry_product_ids" widget="many2many_tags"/>
+            </page>
+            <page string="Günlük Log">
+              <field name="log_ids">
+                <list editable="bottom">
+                  <field name="date"/>
+                  <field name="weight_kg"/>
+                  <field name="notes"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="action_diet_members" model="ir.actions.act_window">
+    <field name="name">Üyeler</field>
+    <field name="res_model">diet.member</field>
+    <field name="view_mode">list,form</field>
+  </record>
+</odoo>

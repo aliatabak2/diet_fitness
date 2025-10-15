@@ -1,0 +1,25 @@
+<odoo>
+  <record id="diet_program_slow" model="diet.program">
+    <field name="name">Yavaş Kilo Verme</field>
+    <field name="intensity">slow</field>
+    <field name="deficit_min">250</field>
+    <field name="deficit_max">350</field>
+    <field name="description">Düşük kalori açığı ile sürdürülebilir kilo kaybı</field>
+  </record>
+
+  <record id="diet_program_medium" model="diet.program">
+    <field name="name">Orta Hız</field>
+    <field name="intensity">medium</field>
+    <field name="deficit_min">400</field>
+    <field name="deficit_max">600</field>
+    <field name="description">Dengeli kalori açığı</field>
+  </record>
+
+  <record id="diet_program_fast" model="diet.program">
+    <field name="name">Hızlı Kilo Verme</field>
+    <field name="intensity">fast</field>
+    <field name="deficit_min">650</field>
+    <field name="deficit_max">800</field>
+    <field name="description">Kısa süreli hızlı kayıp (sağlık limitlerine dikkat)</field>
+  </record>
+</odoo>
