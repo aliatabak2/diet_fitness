@@ -1,0 +1,17 @@
+<odoo>
+  <!-- sadece katılımcılar kendininkileri görsğn -->
+  <record id="dm_thread_rule_owner" model="ir.rule">
+    <field name="name">DM Threads: participants only</field>
+    <field name="model_id" ref="model_diet_dm_thread"/>
+    <field name="groups" eval="[(4, ref('diet_fitness.group_diet_user'))]"/>
+    <field name="domain_force">[('participant_ids','in',[user.partner_id.id])]</field>
+  </record>
+
+  <!-- sadece katılımcılar bu threaddaki mesajları görsün -->
+  <record id="dm_message_rule_owner" model="ir.rule">
+    <field name="name">DM Messages: participants only</field>
+    <field name="model_id" ref="model_diet_dm_message"/>
+    <field name="groups" eval="[(4, ref('diet_fitness.group_diet_user'))]"/>
+    <field name="domain_force">[('thread_id.participant_ids','in',[user.partner_id.id])]</field>
+  </record>
+</odoo>

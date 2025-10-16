@@ -1,5 +1,6 @@
 import random
 from odoo import models, fields, api
+
 from math import floor
 from random import Random
 from datetime import date, timedelta
