@@ -1,0 +1,87 @@
+<odoo>
+
+  <!-- Üye Listesi -->
+  <template id="portal_member_list" name="Diet: Members">
+    <t t-call="portal.portal_layout">
+      <div class="container py-4">
+        <h3 class="mb-3">Üyeler</h3>
+        <div class="list-group">
+          <t t-foreach="members" t-as="m">
+            <a t-attf-href="/my/diet/messages/start/#{m.partner_id.id}"
+               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+              <span t-esc="m.partner_id.name"/>
+              <span class="text-muted small">Mesaj gönder</span>
+            </a>
+          </t>
+          <t t-if="not members">
+            <div class="text-muted">Üye bulunamadı.</div>
+          </t>
+        </div>
+      </div>
+    </t>
+  </template>
+
+  <!-- DM Gelen Kutusu -->
+  <template id="portal_dm_inbox" name="Diet: Inbox">
+    <t t-call="portal.portal_layout">
+      <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center">
+          <h3 class="mb-3">Mesajlar</h3>
+          <a href="/my/diet/members" class="btn btn-secondary">Üye Bul</a>
+        </div>
+
+        <div class="list-group">
+          <t t-foreach="threads" t-as="t">
+            <a t-attf-href="/my/diet/messages/#{t.id}" class="list-group-item list-group-item-action">
+              <div class="d-flex justify-content-between">
+                <strong t-esc="t.name"/>
+                <small class="text-muted" t-esc="t.last_message_date or ''"/>
+              </div>
+              <small class="text-muted">
+                <t t-if="t.message_ids">Son: <t t-esc="t.message_ids[-1].body[:80] if t.message_ids else ''"/>...</t>
+                <t t-if="not t.message_ids">Henüz mesaj yok</t>
+              </small>
+            </a>
+          </t>
+          <t t-if="not threads">
+            <div class="text-muted">Sohbet bulunamadı.</div>
+          </t>
+        </div>
+      </div>
+    </t>
+  </template>
+
+  <!-- DM Thread -->
+  <template id="portal_dm_thread" name="Diet: Thread">
+    <t t-call="portal.portal_layout">
+      <div class="container py-4">
+        <a href="/my/diet/messages" class="btn btn-link">&#8592; Mesajlar</a>
+        <h4 class="mb-3" t-esc="thread.name"/>
+
+        <div class="card mb-3">
+          <div class="card-body" style="max-height: 50vh; overflow-y: auto;">
+            <t t-foreach="thread.message_ids" t-as="msg">
+              <div class="mb-3">
+                <div>
+                  <strong t-esc="msg.author_id.name"/>:
+                </div>
+                <div t-esc="msg.body"/>
+                <small class="text-muted" t-esc="msg.create_date or ''"/>
+              </div>
+            </t>
+            <t t-if="not thread.message_ids">
+              <div class="text-muted">Henüz mesaj yok.</div>
+            </t>
+          </div>
+        </div>
+
+        <form t-attf-action="/my/diet/messages/#{thread.id}/send" method="post" class="d-flex gap-2">
+          <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+          <input type="text" name="body" class="form-control" placeholder="Mesaj yaz..." required="required"/>
+          <button class="btn btn-primary" type="submit">Gönder</button>
+        </form>
+      </div>
+    </t>
+  </template>
+
+</odoo>

@@ -14,6 +14,9 @@
     "security/diet_security.xml",      
     "security/ir.model.access.csv",
     "views/member_views.xml",
+    'security/dm_rules.xml',
+    'views/portal_dm_templates.xml',
+    
     "views/program_views.xml",
     "views/nutrition_views.xml",  
     "views/exercise_views.xml",
