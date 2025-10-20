@@ -6,3 +6,4 @@ from . import plan
 from . import user_auto_member
 from . import period
 from . import dm
+from . import forum

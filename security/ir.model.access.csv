@@ -9,12 +9,24 @@ diet_workout_user,diet.workout user,model_diet_workout,base.group_user,1,1,1,0
 diet_workout_line_user,diet.workout.line user,model_diet_workout_line,base.group_user,1,1,1,0
 diet_daily_plan_user,diet.daily.plan user,model_diet_daily_plan,base.group_user,1,1,1,0
 diet_daily_meal_line_user,diet.daily.meal.line user,model_diet_daily_meal_line,base.group_user,1,1,1,0
+
 diet_period_user,diet.period.plan user,model_diet_period_plan,diet_fitness.group_diet_user,1,1,1,0
 diet_period_manager,diet.period.plan manager,model_diet_period_plan,diet_fitness.group_diet_manager,1,1,1,1
 diet_period_all,diet.period.plan all,model_diet_period_plan,,1,1,1,1
 diet_daily_meal_line_user,diet.daily.meal.line user,model_diet_daily_meal_line,diet_fitness.group_diet_user,1,1,1,0
 diet_daily_meal_line_manager,diet.daily.meal.line manager,model_diet_daily_meal_line,diet_fitness.group_diet_manager,1,1,1,1
+
+
 diet_dm_thread_user,DM Thread user,model_diet_dm_thread,diet_fitness.group_diet_user,1,1,1,0
 diet_dm_thread_manager,DM Thread manager,model_diet_dm_thread,diet_fitness.group_diet_manager,1,1,1,1
 diet_dm_message_user,DM Message user,model_diet_dm_message,diet_fitness.group_diet_user,1,1,1,0
 diet_dm_message_manager,DM Message manager,model_diet_dm_message,diet_fitness.group_diet_manager,1,1,1,1
+
+
+
+diet_forum_message_portal,diet.forum.message portal,model_diet_forum_message,base.group_portal,1,1,1,0
+diet_forum_post_portal,diet.forum.post portal,model_diet_forum_post,base.group_portal,1,1,1,0
+diet_forum_comment_portal,diet.forum.comment portal,model_diet_forum_comment,base.group_portal,1,1,1,0
+diet_forum_message_user,diet.forum.message user,model_diet_forum_message,diet_fitness.group_diet_user,1,1,1,1
+diet_forum_post_user,diet.forum.post user,model_diet_forum_post,diet_fitness.group_diet_user,1,1,1,1
+diet_forum_comment_user,diet.forum.comment user,model_diet_forum_comment,diet_fitness.group_diet_user,1,1,1,1

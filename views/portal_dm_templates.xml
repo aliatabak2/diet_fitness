@@ -27,7 +27,8 @@
       <div class="container py-4">
         <div class="d-flex justify-content-between align-items-center">
           <h3 class="mb-3">Mesajlar</h3>
-          <a href="/my/diet/members" class="btn btn-secondary">Üye Bul</a>
+         
+
         </div>
 
         <div class="list-group">
