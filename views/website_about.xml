@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="page_about" name="About: Company Page">
+    <t t-call="website.layout">
+      <div id="wrap" class="oe_structure">
+        <!-- Yukarıdaki HTML bloğunu buraya da bire bir ekleyebilirsin -->
+        <section class="py-5 bg-light">
+          <div class="container">
+            <h1 class="display-5 fw-bold mb-3">Hakkımızda</h1>
+            <p class="lead text-muted">Şirketinin kısa tanımı…</p>
+            <a href="/contactus" class="btn btn-primary btn-lg mt-2">İletişime Geç</a>
+          </div>
+        </section>
+      </div>
+    </t>
+  </template>
+</odoo>
