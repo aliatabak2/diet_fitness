@@ -303,7 +303,7 @@ class DietDailyPlan(models.Model):
     @api.depends("member_id", "date")
     def _compute_name(self):
         for rec in self:
-            rec.name = f"{rec.member_id.partner_id.name or 'Üye'} - {rec.date or ''}"
+            rec.name = f"{rec.member_id.partner_id.name or 'Ayse <3'} - {rec.date or ''}"
 
     def _estimate_tdee(self, member):
         if member.gender == "male":
@@ -332,7 +332,7 @@ class DietDailyPlan(models.Model):
                     "meal_type": where,
                     "recipe_id": used_recipe.id if used_recipe else False,
                     "note": msg,
-                    # kcal related & readonly, set etmiyoruz
+                    # burdaki değişken related & readonly, set etmiyoz o yüzden
                 })
             rec.state = "ready"
 
