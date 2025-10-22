@@ -1,0 +1,51 @@
+<odoo>
+
+<template>
+
+<record id="portal_my_diet_appointments" model="portal.template">
+    <field name="name">My Diet Appointments</field>
+    <field name="inherit_id" ref="portal.portal_my_account"/>
+    <field name="arch" type="xml">
+        <xpath expr="//div[@id='my_account_content']" position="inside">
+            <t t-call="diet_fitness.portal_appointments_list"/>
+        </xpath>
+    </field>
+</record>
+
+<fieldset name="portal_appointments_list" position="replace">
+    <template id="portal_appointments_list">
+        <h2>Randevularım</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Danışman</th>
+                    <th>Başlangıç</th>
+                    <th>Bitiş</th>
+                    <th>Durum</th>
+                    <th>Notlar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="appointments" t-as="appointment">
+                    <tr>
+                        <td><t t-esc="appointment.advisor_id.name"/></td>
+                        <td><t t-esc="appointment.date_start"/></td>
+                        <td><t t-esc="appointment.date_end"/></td>
+                        <td><t t-esc="appointment.state"/></td>
+                        <td><t t-esc="appointment.note"/></td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </template>
+</fieldset>
+<fieldset> name="portal_my_account" position="inside">
+    <a href="/my/diet/appointments">Randevularım</a>
+    <a href="/my/diet/appointments/new">Yeni Randevu Talep Et</a>
+</fieldset>
+
+
+
+</template>
+
+</odoo>

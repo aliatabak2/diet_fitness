@@ -31,14 +31,34 @@ class DietAppointment(models.Model):
     )
 
 #basit doğrulama
-    @api.constrains("date_start", "date_end")
+    @api.constrains("date_start", "date_end","advisor_id")
     def _check_dates(self):
         for rec in self:
             if rec.date_end and rec.date_start and rec.date_end <= rec.date_start:
                 raise ValueError("Bitiş, başlangıçtan sonra olmalı.")
-    @api.constrains("advisor_id")
+            
     def _check_advisor_is_admin(self):
         admin_group = self.env.ref("base.group_system")
         for rec in self:
             if rec.advisor_id and admin_group not in rec.advisor_id.groups_id:
                 raise ValidationError("Danışman yalnızca admin (Yönetici) olabilir.")
+    def action_confirm(self):
+        self._check_advisor_is_admin()
+        self.write({"state": "confirm"})
+
+    def action_done(self):
+        self._check_advisor_is_admin()
+        self.write({"state": "done"})
+
+    def action_cancel(self):
+        self._check_advisor_is_admin()
+        self.write({"state": "cancel"})        
+   
+   
+   # @api.constrains("advisor_id")
+   # def _check_advisor_is_admin(self):
+   #     admin_group = self.env.ref("base.group_system")
+   #     for rec in self:
+   #         if rec.advisor_id and admin_group not in rec.advisor_id.groups_id:
+   #             raise ValidationError("Danışman yalnızca admin (Yönetici) olabilir.")
+
