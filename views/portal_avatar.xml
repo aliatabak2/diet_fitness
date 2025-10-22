@@ -1,0 +1,26 @@
+<odoo>
+  <data>
+    <template id="portal_my_account_avatar"
+              inherit_id="website_profile.portal_my_account"
+              name="Portal Account: Avatar Upload">
+      <xpath expr="//form[contains(@class, 'o_portal_my_details')]" position="inside">
+        <div class="card mt-3">
+          <div class="card-header">Profil Fotoğrafı</div>
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <img t-att-src="'/web/image/res.partner/%s/image_1920' % request.env.user.partner_id.id"
+                   alt="Avatar" class="rounded me-3"
+                   style="width:72px;height:72px;object-fit:cover;"/>
+              <form t-attf-action="/my/account/avatar" method="post" enctype="multipart/form-data" class="d-flex align-items-center">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <input type="file" name="avatar" accept="image/*" class="form-control me-2" style="max-width:280px;" required="required"/>
+                <button type="submit" class="btn btn-primary">Yükle</button>
+              </form>
+            </div>
+            <small class="text-muted d-block mt-2">Önerilen: kare görsel, ~512x512 px.</small>
+          </div>
+        </div>
+      </xpath>
+    </template>
+  </data>
+</odoo>

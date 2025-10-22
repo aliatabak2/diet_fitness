@@ -1,0 +1,18 @@
+<!-- /mnt/extra-addons/diet_fitness/security/appointment_rules.xml -->
+<odoo>
+  <!-- Üyeler sadece kendi randevularını görsün -->
+  <record id="rule_appointment_portal_own" model="ir.rule">
+    <field name="name">Appointment: own member only</field>
+    <field name="model_id" ref="model_diet_appointment"/>
+    <field name="groups" eval="[(4, ref('diet_fitness.group_diet_user'))]"/>
+    <field name="domain_force">[('partner_id','=',user.partner_id.id)]</field>
+  </record>
+
+  <!-- Yöneticiler tüm kayıtları görür -->
+  <record id="rule_appointment_manager_all" model="ir.rule">
+    <field name="name">Appointment: managers all</field>
+    <field name="model_id" ref="model_diet_appointment"/>
+    <field name="groups" eval="[(4, ref('diet_fitness.group_diet_manager'))]"/>
+    <field name="domain_force">[(1,'=',1)]</field>
+  </record>
+</odoo>

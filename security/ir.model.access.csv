@@ -30,3 +30,7 @@ diet_forum_comment_portal,diet.forum.comment portal,model_diet_forum_comment,bas
 diet_forum_message_user,diet.forum.message user,model_diet_forum_message,diet_fitness.group_diet_user,1,1,1,1
 diet_forum_post_user,diet.forum.post user,model_diet_forum_post,diet_fitness.group_diet_user,1,1,1,1
 diet_forum_comment_user,diet.forum.comment user,model_diet_forum_comment,diet_fitness.group_diet_user,1,1,1,1
+
+
+diet_appointment_user,diet.appointment user,model_diet_appointment,diet_fitness.group_diet_user,1,0,0,0
+diet_appointment_manager,diet.appointment manager,model_diet_appointment,diet_fitness.group_diet_manager,1,1,1,1

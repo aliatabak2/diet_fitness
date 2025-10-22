@@ -7,12 +7,13 @@
     "website": "https://waresky.com",
     "license": "LGPL-3",
  
-"depends": ["base","contacts","product","uom","mail","website","portal"],
+"depends": ["base","contacts","product","uom","mail","website","website_profile","portal"],
 
 "data": [
   
     "security/diet_security.xml",      
     "security/ir.model.access.csv",
+    "views/menu.xml",
     "views/member_views.xml",
     'security/dm_rules.xml',
     'views/portal_dm_templates.xml',
@@ -22,12 +23,16 @@
     "views/exercise_views.xml",
     "views/period_views.xml",
     "views/plan_views.xml",
-    "views/portal_templates.xml", 
+    
+    'security/appointment_rules.xml',
+    'views/appointment_views.xml',
+    'views/portal_appointment_templates.xml',
+    #"views/portal_avatar.xml",
 
     "security/diet_portal_rules.xml",
     "data/diet_program_data.xml",
-   
-    "views/menu.xml",
+   "views/portal_templates.xml", 
+    
 
    
 ],    

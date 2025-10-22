@@ -1,0 +1,45 @@
+<odoo>
+  <!-- Views -->
+  <record id="view_diet_appointment_list" model="ir.ui.view">
+    <field name="name">diet.appointment.list</field>
+    <field name="model">diet.appointment</field>
+    <field name="arch" type="xml">
+      <list>
+        <field name="name"/>
+        <field name="member_id"/>
+        <field name="advisor_id"/>
+        <field name="type"/>
+        <field name="date_start"/>
+        <field name="state"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="view_diet_appointment_form" model="ir.ui.view">
+    <field name="name">diet.appointment.form</field>
+    <field name="model">diet.appointment</field>
+    <field name="arch" type="xml">
+      <form string="Randevu">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="member_id"/>
+            <!-- Sadece admin görsün -->
+            <field name="advisor_id" groups="base.group_system"/>
+            <field name="type"/>
+            <field name="date_start"/>
+            <field name="state" readonly="1"/>
+            <field name="note"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action (MENÜ DEĞİL) -->
+  <record id="action_diet_appointment" model="ir.actions.act_window">
+    <field name="name">Randevular</field>
+    <field name="res_model">diet.appointment</field>
+    <field name="view_mode">list,form</field>
+  </record>
+</odoo>

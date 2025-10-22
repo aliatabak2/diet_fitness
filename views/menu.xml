@@ -1,14 +1,36 @@
 <odoo>
+  <!-- KÖK MENÜ -->
   <menuitem id="menu_diet_root" name="Diyet &amp; Fitness" sequence="10"/>
-  <menuitem id="menu_diet_members" name="Üyeler" parent="menu_diet_root" sequence="10" action="action_diet_members"/>
-  <menuitem id="menu_diet_programs" name="Programlar" parent="menu_diet_root" sequence="20" action="action_diet_programs"/>
+
+  <!-- Üyeler / Programlar -->
+  <menuitem id="menu_diet_members"  name="Üyeler"        parent="menu_diet_root" sequence="10" action="action_diet_members"/>
+  <menuitem id="menu_diet_programs" name="Programlar"     parent="menu_diet_root" sequence="20" action="action_diet_programs"/>
+
+  <!-- Beslenme -->
   <menuitem id="menu_diet_nutrition" name="Beslenme" parent="menu_diet_root" sequence="30"/>
-  <menuitem id="menu_diet_recipes" name="Yemek Tarifleri" parent="menu_diet_nutrition" sequence="10" action="action_diet_recipes"/>
+  <menuitem id="menu_diet_recipes"   name="Yemek Tarifleri" parent="menu_diet_nutrition" sequence="10" action="action_diet_recipes"/>
+
+  <!-- Spor -->
   <menuitem id="menu_diet_exercises" name="Spor" parent="menu_diet_root" sequence="40" action="action_diet_exercises"/>
-  <menuitem id="menu_diet_plans" name="Günlük Planlar" parent="menu_diet_root" sequence="50" action="action_diet_daily_plans"/>
-  <menuitem id="menu_diet_periods"
-          name="Dönemlik Planlar"
-          parent="menu_diet_root"
-          sequence="60"
-          action="diet_fitness.action_diet_periods"/>
+
+  <!-- Günlük / Dönemlik Planlar -->
+  <menuitem id="menu_diet_plans"   name="Günlük Planlar"   parent="menu_diet_root" sequence="50" action="action_diet_daily_plans"/>
+  <menuitem id="menu_diet_periods" name="Dönemlik Planlar" parent="menu_diet_root" sequence="60" action="diet_fitness.action_diet_periods"/>
+
+  <!-- İLETİŞİM (yalnızca admin görsün) -->
+ <menuitem id="menu_diet_comm" name="İletişim" parent="menu_diet_root" sequence="70" groups="base.group_system"/>
+  <!-- Randevular Action -->
+  <record id="action_diet_appointment" model="ir.actions.act_window">
+    <field name="name">Randevular</field>
+    <field name="res_model">diet.appointment</field>
+    <field name="view_mode">list,form</field>
+  </record>
+
+  <!-- Randevular menüsü (İletişim altında) -->
+   <menuitem id="menu_diet_appointment"
+            name="Randevular"
+            parent="menu_diet_comm"
+            action="diet_fitness.action_diet_appointment"
+            sequence="80"
+            groups="base.group_system"/>
 </odoo>

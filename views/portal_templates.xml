@@ -154,6 +154,8 @@
     </t>
   </template>
 
+
+
   <!-- DÖNEM DETAY -->
   <template id="portal_period_detail" name="Diet: Period Detail">
     <t t-call="portal.portal_layout">
