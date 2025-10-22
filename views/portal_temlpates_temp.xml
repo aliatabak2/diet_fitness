@@ -519,7 +519,7 @@
             </div>
           </div>
         </form>
-<!--eklentiyi ayırdım skimden aşşa kasımpaşa  -->
+<!--eklenti daha derli durması için ayrıldı  -->
         <div class="row g-3">
           <t t-foreach="recipes" t-as="r">
             <div class="col-12 col-md-6 col-lg-4">
