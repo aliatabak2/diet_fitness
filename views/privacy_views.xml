@@ -1,0 +1,56 @@
+<t name="Privacy Policy" t-name="website.gizlilik-politikasi">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="oe_structure">
+                    <section class="s_title parallax s_parallax_is_fixed bg-black-50 pt24 pb24" data-vcss="001" data-snippet="s_title" data-scroll-background-ratio="1">
+                        <span class="s_parallax_bg oe_img_bg" style="background-image: url('/web/image/website.s_parallax_default_image'); background-position: 50% 0;"/>
+                        <div class="o_we_bg_filter bg-black-50"/>
+                        <div class="container">
+                            <h1>Gizlilik Politikası</h1>
+                        </div>
+                    </section>
+                </div>
+                <div class="oe_structure"><section class="s_faq_collapse o_cc o_cc2 pt64 pb64" data-vcss="001" data-snippet="s_faq_collapse">
+        <div class="container">
+            <div class="row align-items-start s_nb_column_fixed">
+                <div class="col-lg-4 pt16">
+                    <h3>Sıkça sorulan sorular</h3>
+                    <p class="lead">İşte şirketimiz hakkında sık sorulan bazı sorular.</p>
+                </div>
+                <div class="col-lg-7 offset-lg-1 s_col_no_bgcolor" data-name="Accordion Box">
+    <div data-name="Accordion" class="s_accordion">
+        <div id="myCollapse" class="accordion-flush accordion">
+            <div class="accordion-item position-relative z-1" data-name="Accordion Item">
+                <button type="button" class="accordion-header accordion-button justify-content-between gap-2 bg-transparent h6-fs fw-bold text-decoration-none text-reset transition-none" data-bs-toggle="collapse" aria-expanded="true" id="accordion-button968735_1" data-bs-target="#myCollapseTab968735_1" aria-controls="myCollapseTab968735_1"><span class="flex-grow-1">Şirketiniz hangi hizmetleri sunuyor ?</span></button>
+                <div class="accordion-collapse collapse show" data-bs-parent="#myCollapse" role="region" id="myCollapseTab968735_1" aria-labelledby="accordion-button968735_1">
+                    <div class="accordion-body">
+                        <p>Şirketimiz; danışmanlık, ürün geliştirme ve müşteri desteği konusunda uzmanlaşmıştır. Hizmetlerimizi farklı sektörlerdeki işletmelerin benzersiz ihtiyaçlarına uyarlıyor, onların rekabetçi bir pazarda büyüyüp başarılı olmalarına yardımcı oluyoruz.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item position-relative z-1" data-name="Accordion Item">
+                <button type="button" class="accordion-header accordion-button collapsed justify-content-between gap-2 bg-transparent h6-fs fw-bold text-decoration-none text-reset transition-none" data-bs-toggle="collapse" aria-expanded="false" id="accordion-button968735_2" data-bs-target="#myCollapseTab968735_2" aria-controls="myCollapseTab968735_2"><span class="flex-grow-1">Müşteri desteğine nasıl ulaşabilirim ?</span></button>
+                <div class="accordion-collapse collapse" data-bs-parent="#myCollapse" role="region" id="myCollapseTab968735_2" aria-labelledby="accordion-button968735_2">
+                    <div class="accordion-body">
+                        <p>Müşteri destek ekibimize info@yourcompany.example.com adresine e-posta göndererek, +1 555-555-5556 numarasını arayarak veya Web Sitemizdeki canlı sohbeti kullanarak ulaşabilirsiniz. Ekibimiz 7/24 hizmetinizdedir ve her türlü soru veya sorununuza yardımcı olmaya hazırdır.</p>
+                        <p>Memnuniyetinizi sağlamak için hızlı ve etkili çözümler sunmaya kararlıyız.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item position-relative z-1" data-name="Accordion Item">
+                <button type="button" class="accordion-header accordion-button collapsed justify-content-between gap-2 bg-transparent h6-fs fw-bold text-decoration-none text-reset transition-none" data-bs-toggle="collapse" aria-expanded="false" id="accordion-button968735_3" data-bs-target="#myCollapseTab968735_3" aria-controls="myCollapseTab968735_3"><span class="flex-grow-1">İade politikanız nedir ?</span></button>
+                <div class="accordion-collapse collapse" data-bs-parent="#myCollapse" role="region" id="myCollapseTab968735_3" aria-labelledby="accordion-button968735_3">
+                    <div class="accordion-body">
+                        <p>Tüm ürünler için 30 günlük iade politikası sunuyoruz. Ürünler orijinal halinde, kullanılmamış olmalı ve fiş veya satın alma kanıtı ile birlikte gönderilmelidir. İadeler, ürünün bize ulaşmasından sonraki 5-7 iş günü içinde işleme alınır.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                </div>
+            </div>
+        </div>
+    </section></div>
+            </div>
+        </t>
+    </t>

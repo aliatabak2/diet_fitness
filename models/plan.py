@@ -63,10 +63,9 @@ class DietDailyPlan(models.Model):
         if kcal_max is not None:
             dom += [('kcal', '<=', max(0, int(kcal_max)))]
 
-        # Önce geniş bir havuz çek (sıralama deterministik; çeşitliliği Python'da yapacağız)
+#önce geniş bir havuz çek (sıralama deterministik; çeşitliliği Python'da yapacağız)
         pool = Recipe.search(dom, order="kcal desc, id asc", limit=limit)
-
-        # Tekrarları ve yakın geçmiştekileri ele
+#tekrarları ve yakın geçmiştekileri ele
         recent_ids = self._recent_recipe_ids(member, days=3)
         pool = [r for r in pool if r.id not in used_ids and r.id not in recent_ids]
 
@@ -81,7 +80,7 @@ class DietDailyPlan(models.Model):
         """Havuzdan birini seç (Python Random ile)."""
         if not candidates:
             return False
-        # küçük bir ağırlık: kcal'e yakın olanlara ufak öncelik verebilirsin
+# küçük bir ağırlık: kcal'e yakın olanlara ufak öncelik verebilirsin
         idx = rng.randrange(0, len(candidates))
         return candidates[idx]
 
@@ -92,12 +91,11 @@ class DietDailyPlan(models.Model):
         for plan in self:
             if plan.workout_id:
                 continue
-            # Basit örnek: haftanın gününe göre seçim
-            # 0=Mon ... 6=Sun
+           
             wd = (plan.date or fields.Date.today()).weekday()
             dom = []
-            # istersen zorluk/program filtreniz varsa buraya ekleyin
-            # örn: dom += [('difficulty', '=', plan.member_id.program_id.pace)]
+     
+
             w = Workout.search(dom, limit=1, order="id asc")
             if w:
                 plan.workout_id = w.id
@@ -140,7 +138,6 @@ class DietDailyPlan(models.Model):
                 require_pantry=True,
                 limit=200
             )
-            # Kiler uyumlu hiç yoksa kiler şartını gevşet
             if not dinner_pool:
                 dinner_pool = self._candidate_pool(
                     base_domain=[('course', '=', 'meal')],
@@ -153,7 +150,7 @@ class DietDailyPlan(models.Model):
 
             dinner = self._pick_one(dinner_pool, rng) if dinner_pool else False
             if not dinner:
-                # Son çare: en düşük kalorili herhangi bir tarif
+#son çare: en düşük kalorili herhangi bir tarif
                 dinner = Recipe.search([], order="kcal asc", limit=2)
 
             if dinner and (dinner.kcal or 0) <= max_total_kcal:
@@ -279,7 +276,7 @@ class DietDailyPlan(models.Model):
             if remain and "dinner" in ratios:
                 ratios["dinner"] += remain
 
-            # NOTE: Random(seed ...) kaldırıldı; zaten kullanılmıyordu
+#random(seed ...) kaldırdım zaten kullanılmıyordu
             for meal_type in meal_schema:
                 kcal_goal = int(target_kcal * ratios[meal_type])
                 recipe = plan._pick_recipe(kcal_goal, meal_type=meal_type, cheat=cheat)

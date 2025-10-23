@@ -56,7 +56,7 @@
            <div class="d-flex align-items-center">
           <span class="badge bg-light text-dark me-2"
                 t-esc="dict(request='Talep',confirm='Onaylandı',done='Tamam',cancel='İptal').get(a.state)"/>
-          <!-- Sadece danışman (veya admin) ve 'request' iken göster -->
+          <!--sadece danışmanken göster -->
           <t t-if="request.env.user.id == a.advisor_id.id or request.env.user.has_group('base.group_system')">
             <t t-if="a.state == 'request'">
               <form t-attf-action="/my/diet/appointment/#{a.id}/confirm" method="post" class="d-inline me-1">

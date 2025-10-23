@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- =========================== -->
+    <!--  MODEL FORM VE TREE VIEWS   -->
+    <!-- =========================== -->
+
+    <record id="view_diet_watch_tree" model="ir.ui.view">
+        <field name="name">diet.watch.tree</field>
+        <field name="model">diet.watch</field>
+        <field name="arch" type="xml">
+            <tree string="Akıllı Saat Verileri" default_order="date desc">
+                <field name="date"/>
+                <field name="member_id"/>
+                <field name="steps"/>
+                <field name="distance_km"/>
+                <field name="kcal_burned"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_diet_watch_form" model="ir.ui.view">
+        <field name="name">diet.watch.form</field>
+        <field name="model">diet.watch</field>
+        <field name="arch" type="xml">
+            <form string="Akıllı Saat Verisi">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="member_id"/>
+                            <field name="date"/>
+                            <field name="steps"/>
+                        </group>
+                        <group>
+                            <field name="distance_km" readonly="1"/>
+                            <field name="kcal_burned" readonly="1"/>
+                        </group>
+                    </group>
+                    <separator string="Ek Bilgiler"/>
+                    <field name="note"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- =========================== -->
+    <!--        ACTION TANIMI        -->
+    <!-- =========================== -->
+
+    <record id="action_diet_watch" model="ir.actions.act_window">
+        <field name="name">Akıllı Saat Verileri</field>
+        <field name="res_model">diet.watch</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p>
+                Buradan üyelerin günlük adım ve kalori yakım verilerini takip edebilirsin.
+            </p>
+        </field>
+    </record>
+
+    <!-- =========================== -->
+    <!--        MENÜ ÖĞESİ           -->
+    <!-- =========================== -->
+
+    <menuitem id="menu_diet_watch_root"
+              name="Akıllı Saat"
+              parent="diet.menu_diet_root"
+              sequence="50"/>
+
+    <menuitem id="menu_diet_watch"
+              name="Veriler"
+              parent="menu_diet_watch_root"
+              action="action_diet_watch"
+              sequence="1"/>
+
+    <!-- =========================== -->
+    <!-- MEMBER FORM İÇİNE TAB EKLE  -->
+    <!-- =========================== -->
+
+    <record id="view_diet_member_form_inherit_watch" model="ir.ui.view">
+        <field name="name">diet.member.form.inherit.watch</field>
+        <field name="model">diet.member</field>
+        <field name="inherit_id" ref="diet.view_diet_member_form"/>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Akıllı Saat">
+                    <field name="watch_ids" context="{'default_member_id': active_id}" >
+                        <tree editable="bottom">
+                            <field name="date"/>
+                            <field name="steps"/>
+                            <field name="distance_km" readonly="1"/>
+                            <field name="kcal_burned" readonly="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</odoo>
