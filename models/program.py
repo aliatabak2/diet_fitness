@@ -21,3 +21,5 @@ class DietProgram(models.Model):
     deficit_max = fields.Integer("Kalori Açığı Max", default=750)
 
     description = fields.Text("Açıklama")
+
+    

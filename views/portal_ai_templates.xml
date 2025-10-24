@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- Hesabım sayfasına kısayol kutusu (portal_my_home üstüne) -->
+  <template id="portal_my_home_ai_tile" inherit_id="portal.portal_my_home" name="AI tile on portal">
+    <xpath expr="//div[contains(@class, 'o_portal_my_home')]//div[contains(@class,'row')]" position="inside">
+      <div class="col-12 col-md-6 col-lg-4 mb-3">
+        <a href="/my/account/ai" class="card h-100 text-decoration-none">
+          <div class="card-body">
+            <h5 class="card-title mb-2"><i class="fa fa-magic me-1"/> ChatGPT Asistan</h5>
+            <p class="card-text text-muted">Sorularınızı sorun, tavsiye alın.</p>
+          </div>
+        </a>
+      </div>
+    </xpath>
+  </template>
+
+  <!-- Hesabım menüsüne link -->
+  <template id="portal_my_account_ai_link" inherit_id="portal.portal_my_account" name="AI link in My Account">
+    <xpath expr="//div[contains(@class,'o_portal_my_details')]" position="before">
+      <div class="mb-3">
+        <a class="btn btn-outline-secondary" href="/my/account/ai">
+          <i class="fa fa-magic me-1"/> ChatGPT Asistanına Git
+        </a>
+      </div>
+    </xpath>
+  </template>
+
+  <!-- Sohbet Sayfası -->
+  <template id="portal_ai_chat" name="Diet: AI Chat">
+    <t t-call="portal.portal_layout">
+      <div class="container py-4">
+        <a href="/my/account" class="btn btn-link">← Hesabım</a>
+        <h3 class="mb-3">ChatGPT Asistan</h3>
+
+        <div class="card mb-3">
+          <div class="card-body" style="max-height: 60vh; overflow:auto;">
+            <t t-if="not messages">
+              <div class="text-muted">Henüz mesaj yok. Aşağıdan sorunuzu yazın.</div>
+            </t>
+            <t t-foreach="messages" t-as="m">
+              <div class="mb-3">
+                <div t-att-class="'fw-bold ' + ('text-primary' if m.role=='user' else 'text-success')">
+                  <t t-esc="'Siz' if m.role=='user' else 'Asistan'"/>
+                </div>
+                <div class="white-space-pre-wrap"><t t-esc="m.content"/></div>
+              </div>
+            </t>
+          </div>
+        </div>
+
+        <form action="/my/account/ai/ask" method="post" class="d-flex">
+          <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+          <textarea name="prompt" class="form-control me-2" rows="2" placeholder="Mesajınızı yazın..." required="required"></textarea>
+          <button class="btn btn-primary" type="submit"><i class="fa fa-paper-plane me-1"/> Gönder</button>
+        </form>
+      </div>
+    </t>
+  </template>
+
+</odoo>
