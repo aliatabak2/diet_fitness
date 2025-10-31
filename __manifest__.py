@@ -18,6 +18,9 @@
     'security/dm_rules.xml',
     'views/portal_dm_templates.xml',
     
+    'security/diet_member_rules.xml',
+    'views/portal_pantry_templates.xml',
+
     "views/program_views.xml",
     "views/nutrition_views.xml",  
     "views/exercise_views.xml",

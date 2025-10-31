@@ -1,0 +1,63 @@
+<odoo>
+
+  <!-- Portal ana sayfaya kutucuk -->
+  <template id="portal_my_home_tile_pantry"
+            inherit_id="portal.portal_my_home"
+            name="Diet: Portal Home Tile Pantry">
+    <!-- portal.portal_my_home içinde belge linklerinin olduğu kısım -->
+    <xpath expr="//div[@id='o_portal_doc_menu']/div" position="inside">
+      <div class="col-12 col-md-6 col-lg-4 mb-3">
+        <a class="o_portal_doc_link btn btn-secondary w-100" href="/my/diet/pantry">
+          <i class="fa fa-shopping-basket me-1"/> Evdeki Malzemeler
+        </a>
+      </div>
+    </xpath>
+  </template>
+
+  <!-- Pantry sayfası -->
+  <template id="portal_pantry" name="Diet: Pantry Editor">
+    <t t-call="portal.portal_layout">
+      <div class="container py-4">
+        <a href="/my" class="btn btn-link">&#8592; Hesabım</a>
+        <h3 class="mb-3">Evdeki Malzemeler</h3>
+
+        <form action="/my/diet/pantry/save" method="post" class="card p-3">
+          <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+          <div class="mb-3">
+            <label class="form-label">Listeden ürün seç (Ctrl ile çoklu):</label>
+           
+            <select class="form-select" name="product_ids" multiple="multiple" size="12">
+              <t t-foreach="products" t-as="p">
+                <option t-att-value="p.id"
+                        t-att-selected="(member and member.pantry_product_ids and p.id in member.pantry_product_ids.ids) and 'selected' or None">
+                  <t t-esc="p.display_name"/>
+                </option>
+              </t>
+            </select>
+            <small class="text-muted">Listede yoksa yönetici yeni ürün eklemelidir.</small>
+          </div>
+
+          <div class="mb-2">
+            <strong>Şu an kayıtlı olanlar:</strong>
+            <div class="mt-1">
+              <t t-foreach="member.pantry_product_ids" t-as="pp">
+                <span class="badge bg-light text-dark me-1 mb-1">
+                  <t t-esc="pp.display_name"/>
+                </span>
+              </t>
+              <t t-if="not member.pantry_product_ids">
+                <span class="text-muted">Henüz ürün seçilmemiş.</span>
+              </t>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <i class="fa fa-save me-1"/> Kaydet
+          </button>
+        </form>
+      </div>
+    </t>
+  </template>
+
+</odoo>

@@ -34,3 +34,5 @@ diet_forum_comment_user,diet.forum.comment user,model_diet_forum_comment,diet_fi
 
 diet_appointment_user,diet.appointment user,model_diet_appointment,diet_fitness.group_diet_user,1,0,0,0
 diet_appointment_manager,diet.appointment manager,model_diet_appointment,diet_fitness.group_diet_manager,1,1,1,1
+
+access_diet_member_portal,diet.member portal,model_diet_member,base.group_portal,1,1,0,0

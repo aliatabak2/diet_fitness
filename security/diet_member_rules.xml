@@ -1,0 +1,9 @@
+<odoo>
+  <!-- Portal kullanıcı sadece kendi member kaydını görsün/yazsın -->
+  <record id="rule_diet_member_portal_own" model="ir.rule">
+    <field name="name">diet.member: portal own</field>
+    <field name="model_id" ref="model_diet_member"/>
+    <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+    <field name="domain_force">[('partner_id','=',user.partner_id.id)]</field>
+  </record>
+</odoo>

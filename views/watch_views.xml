@@ -2,20 +2,20 @@
 <odoo>
 
     <!-- =========================== -->
-    <!--  MODEL FORM VE TREE VIEWS   -->
+    <!--  MODEL FORM VE list VIEWS   -->
     <!-- =========================== -->
 
-    <record id="view_diet_watch_tree" model="ir.ui.view">
-        <field name="name">diet.watch.tree</field>
+    <record id="view_diet_watch_list" model="ir.ui.view">
+        <field name="name">diet.watch.list</field>
         <field name="model">diet.watch</field>
         <field name="arch" type="xml">
-            <tree string="Akıllı Saat Verileri" default_order="date desc">
+            <list string="Akıllı Saat Verileri" default_order="date desc">
                 <field name="date"/>
                 <field name="member_id"/>
                 <field name="steps"/>
                 <field name="distance_km"/>
                 <field name="kcal_burned"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -50,7 +50,7 @@
     <record id="action_diet_watch" model="ir.actions.act_window">
         <field name="name">Akıllı Saat Verileri</field>
         <field name="res_model">diet.watch</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p>
                 Buradan üyelerin günlük adım ve kalori yakım verilerini takip edebilirsin.
@@ -85,12 +85,12 @@
             <notebook position="inside">
                 <page string="Akıllı Saat">
                     <field name="watch_ids" context="{'default_member_id': active_id}" >
-                        <tree editable="bottom">
+                        <list editable="bottom">
                             <field name="date"/>
                             <field name="steps"/>
                             <field name="distance_km" readonly="1"/>
                             <field name="kcal_burned" readonly="1"/>
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </notebook>
