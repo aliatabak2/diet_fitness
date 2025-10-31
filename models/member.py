@@ -7,7 +7,15 @@ class DietMember(models.Model):
     _name = "diet.member"
     _description = "Üye (Diyet/Spor)"
     _inherit = ["mail.thread", "mail.activity.mixin"]
+    _rec_name = "display_name"  # <-- EKLENDİ: seçimlerde bu alan görünsün
 
+    # Ad Soyad'ı partnerdan çeken alan
+    display_name = fields.Char(
+        related="partner_id.display_name",
+        string="Ad Soyad",
+        store=True,
+        readonly=True,
+    )
     partner_id = fields.Many2one("res.partner", string="Kişi", required=True, ondelete="cascade")
     program_id = fields.Many2one(
         "diet.program", string="Diyet Programı",

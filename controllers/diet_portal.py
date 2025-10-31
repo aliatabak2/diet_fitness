@@ -85,14 +85,14 @@ class DietPortal(http.Controller):
         if not _ensure_own_record(plan, member):
             return request.redirect('/my/diet')
 
-        return request.render('diet_fitness.portal_plan_detail', {
+        return request.render('diet_fitness.portal_diet_plan', {
             'member': member,
             'plan': plan,
             'total_kcal': sum(plan.meal_line_ids.mapped('kcal')),
         })
 
     # GÜNLÜK PLAN YENİDEN OLUŞTUR (POST)
-    @http.route(['/my/diet/plan/<int:plan_id>/regen'], type='http', auth='user', methods=['POST'], csrf=False, website=True)
+    @http.route(['/my/diet/plan/<int:plan_id>/regen'], type='http', auth='user', methods=['POST'], csrf=True, website=True)
     def my_diet_plan_regen(self, plan_id, **post):
         member = _member_for_current_user()
         plan = request.env['diet.daily.plan'].sudo().browse(plan_id)

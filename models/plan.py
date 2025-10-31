@@ -169,7 +169,7 @@ class DietDailyPlan(models.Model):
                 remain = max_total_kcal - total
                 single_cap = min(extra_max_kcal, remain)
 
-                # Önce kiler uyumlu havuz
+                #önce kiler uyumlu havuz
                 extra_pool = self._candidate_pool(
                     base_domain=[('kcal', '>=', 0)],  # course aşağıda atanacak
                     kcal_max=single_cap,
@@ -178,7 +178,7 @@ class DietDailyPlan(models.Model):
                     require_pantry=True,
                     limit=200
                 )
-                # course filtrelemesi: kahvaltı/snack için yan/ salata da kabul
+                #course filtrelemesi: kahvaltı/snack için yan/ salata da kabul
                 def _ok_for(meal_type, r):
                     if meal_type == "breakfast":
                         return r.course in ('meal', 'side', 'salad')
@@ -189,7 +189,7 @@ class DietDailyPlan(models.Model):
                 mtype = extra_types[idx % len(extra_types)]
                 extra_pool = [r for r in extra_pool if _ok_for(mtype, r)]
 
-                # Kiler uyumlu yoksa şartı gevşet
+                #kiler uyumlu yoksa şartı gevşet
                 if not extra_pool:
                     extra_pool = self._candidate_pool(
                         base_domain=[],
