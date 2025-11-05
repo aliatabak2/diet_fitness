@@ -14,7 +14,18 @@
       </list>
     </field>
   </record>
-
+  <!--vip alanı-->
+  <record id="view_diet_member_form_inherit_vip" model="ir.ui.view">
+      <field name="name">diet.member.form.vip.flag</field>
+      <field name="model">diet.member</field>
+      <field name="inherit_id" ref="diet_fitness.view_diet_member_form"/>
+      <field name="arch" type="xml">
+        <!-- partner_id alanından sonra ekleyelim -->
+        <xpath expr="//field[@name='partner_id']" position="after">
+          <field name="is_vip"/>
+        </xpath>
+      </field>
+    </record>
   <record id="view_diet_member_form" model="ir.ui.view">
     <field name="name">diet.member.form</field>
     <field name="model">diet.member</field>

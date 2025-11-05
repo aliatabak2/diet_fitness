@@ -29,8 +29,7 @@
            
             <select class="form-select" name="product_ids" multiple="multiple" size="12">
               <t t-foreach="products" t-as="p">
-                <option t-att-value="p.id"
-                        t-att-selected="(member and member.pantry_product_ids and p.id in member.pantry_product_ids.ids) and 'selected' or None">
+                <option t-att-value="p.id" t-att-selected="p.id in selected_ids">
                   <t t-esc="p.display_name"/>
                 </option>
               </t>

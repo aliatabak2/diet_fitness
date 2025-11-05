@@ -8,3 +8,4 @@ from . import period
 from . import dm
 from . import forum
 from . import appointment
+from . import res_users

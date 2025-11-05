@@ -23,7 +23,11 @@ class DietPortal(http.Controller):
                 plan.action_generate_meals()
 
         values = {'member': member, 'plan': plan}
-        return request.render('diet_fitness.portal_diet_plan', values)
+        tpl = 'diet_fitness.portal_diet_plan_vip' if request.env.user.has_group(
+            'diet_fitness.group_portal_vip'
+        ) else 'diet_fitness.portal_diet_plan'
+        return request.render(tpl, values)
+
 
     @http.route('/my/diet/line/<int:line_id>/toggle', type='json', auth='user', methods=['POST'])
     def toggle_meal_done(self, line_id):

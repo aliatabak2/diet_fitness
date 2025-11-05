@@ -1,0 +1,7 @@
+<odoo>
+  <record id="group_portal_vip" model="res.groups">
+    <field name="name">VIP Kullanıcı</field>
+    <field name="category_id" ref="base.module_category_website"/>
+    <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+  </record>
+</odoo>

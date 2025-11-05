@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <template id="portal_my_vip" name="VIP: Portal Home">
+    <t t-call="portal.portal_layout">
+      <div class="container py-4">
+        <h3 class="mb-3">VIP Hesabım</h3>
+        <p class="text-muted">Hoş geldiniz, <t t-esc="user.name"/>.</p>
+        <!-- Şimdilik standart /my ile aynı içerik yerine basit yer tutucu -->
+        <div class="alert alert-info">
+          Bu alan VIP kullanıcılara özel paneller için ayrılmıştır. 
+          (Örn: Özel randevu slotları, VIP diyet planı, koç mesajları vb.)
+        </div>
+        <a class="btn btn-secondary" href="/my">Standart portala git</a>
+      </div>
+    </t>
+  </template>
+</odoo>

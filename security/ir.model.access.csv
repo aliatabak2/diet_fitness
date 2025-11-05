@@ -17,12 +17,12 @@ diet_daily_meal_line_user,diet.daily.meal.line user,model_diet_daily_meal_line,d
 diet_daily_meal_line_manager,diet.daily.meal.line manager,model_diet_daily_meal_line,diet_fitness.group_diet_manager,1,1,1,1
 
 
-diet_dm_thread_user,DM Thread user,model_diet_dm_thread,diet_fitness.group_diet_user,1,1,1,0
+diet_dm_thread_user,DM Thread user,model_diet_dm_thread,diet_fitness.group_diet_user,1,1,1,1
 diet_dm_thread_manager,DM Thread manager,model_diet_dm_thread,diet_fitness.group_diet_manager,1,1,1,1
 diet_dm_message_user,DM Message user,model_diet_dm_message,diet_fitness.group_diet_user,1,1,1,0
 diet_dm_message_manager,DM Message manager,model_diet_dm_message,diet_fitness.group_diet_manager,1,1,1,1
 
-
+access_diet_appointment_portal_vip,diet.appointment portal vip,model_diet_appointment,diet_fitness.group_portal_vip,1,1,1,0
 
 diet_forum_message_portal,diet.forum.message portal,model_diet_forum_message,base.group_portal,1,1,1,0
 diet_forum_post_portal,diet.forum.post portal,model_diet_forum_post,base.group_portal,1,1,1,0
@@ -35,4 +35,4 @@ diet_forum_comment_user,diet.forum.comment user,model_diet_forum_comment,diet_fi
 diet_appointment_user,diet.appointment user,model_diet_appointment,diet_fitness.group_diet_user,1,0,0,0
 diet_appointment_manager,diet.appointment manager,model_diet_appointment,diet_fitness.group_diet_manager,1,1,1,1
 
-access_diet_member_portal,diet.member portal,model_diet_member,base.group_portal,1,1,0,0
+access_diet_member_portal,diet.member portal,model_diet_member,base.group_portal,1,1,1,0

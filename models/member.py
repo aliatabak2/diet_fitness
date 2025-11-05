@@ -7,9 +7,9 @@ class DietMember(models.Model):
     _name = "diet.member"
     _description = "Üye (Diyet/Spor)"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _rec_name = "display_name"  # <-- EKLENDİ: seçimlerde bu alan görünsün
-
-    # Ad Soyad'ı partnerdan çeken alan
+    _rec_name = "display_name"  
+    is_vip = fields.Boolean("VIP Kullanıcı", default=False, tracking=True)
+#panelin defaultu id gösteriyo bura da ismöi partnerdan çeken alan
     display_name = fields.Char(
         related="partner_id.display_name",
         string="Ad Soyad",
@@ -27,13 +27,13 @@ class DietMember(models.Model):
     weight_kg = fields.Float("Kilo (kg)", required=True, tracking=True)
     target_weight_kg = fields.Float("Hedef Kilo (kg)")
 
-    # vücut ölçüleri
+    #vücut ölçüleri
     waist_cm = fields.Float("Bel (cm)")
     hip_cm = fields.Float("Kalça (cm)")
     neck_cm = fields.Float("Boyun (cm)")
     chest_cm = fields.Float("Göğüs (cm)")
 
-    # hesaplamalar
+    #hesaplamalar
     bmi = fields.Float("BMI", compute="_compute_metrics", store=True)
     body_fat_pct = fields.Float("Yağ Oranı (%)", compute="_compute_metrics", store=True)
 
@@ -45,21 +45,49 @@ class DietMember(models.Model):
         ("athlete", "Atletik"),
     ], string="Aktivite", default="light", tracking=True)
 
-    # üyenin evdeki malzemeleri 
+    #üyenin evdeki malzemeleri 
     pantry_product_ids = fields.Many2many("product.product", string="Evdeki Malzemeler")
 
     log_ids = fields.One2many("diet.member.log", "member_id", string="Günlük Loglar")
 
+
+    def _sync_vip_to_user(self):
+        """Üyenin VIP statüsünü partnera bağlı kullanıcıya yansıt."""
+        vip_group = self.env.ref('diet_fitness.group_portal_vip', raise_if_not_found=False)
+        for rec in self:
+            user = rec.partner_id.user_ids[:1]  # partner'a bağlı ilk kullanıcı
+            if not user:
+                continue
+            # res.users boolean'ını güncelle
+            if hasattr(user, 'is_portal_vip'):
+                user.sudo().is_portal_vip = rec.is_vip
+            # VIP grubunu ekle/çıkar
+            if vip_group:
+                if rec.is_vip:
+                    user.sudo().write({'groups_id': [(4, vip_group.id)]})
+                else:
+                    user.sudo().write({'groups_id': [(3, vip_group.id)]})
+    @api.model
+    def create(self, vals):
+        rec = super().create(vals)
+        rec._sync_vip_to_user()
+        return rec
+
+    def write(self, vals):
+        res = super().write(vals)
+        if 'is_vip' in vals or 'partner_id' in vals:
+            self._sync_vip_to_user()
+        return res
     @api.depends("height_cm", "weight_kg", "gender", "waist_cm", "hip_cm", "neck_cm")
     def _compute_metrics(self):
         for rec in self:
-            # BMI
+            #BMI
             if rec.height_cm:
                 rec.bmi = rec.weight_kg / ((rec.height_cm / 100.0) ** 2)
             else:
                 rec.bmi = 0.0
 
-            # basit yağ oranı formülü
+            #basit yağ oranı formülü
             if rec.gender and rec.waist_cm and rec.neck_cm and rec.height_cm:
                 try:
                     if rec.gender == "male":

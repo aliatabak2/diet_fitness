@@ -13,11 +13,12 @@
   
     "security/diet_security.xml",      
     "security/ir.model.access.csv",
+     "security/diet_portal_rules.xml",
     "views/menu.xml",
     "views/member_views.xml",
     'security/dm_rules.xml',
     'views/portal_dm_templates.xml',
-    
+   'views/res_users_views.xml',
     'security/diet_member_rules.xml',
     'views/portal_pantry_templates.xml',
 
@@ -31,8 +32,8 @@
     'views/appointment_views.xml',
     'views/portal_appointment_templates.xml',
     #"views/portal_avatar.xml",
-
-    "security/diet_portal_rules.xml",
+    'views/portal_vip_templates.xml',
+   
     "data/diet_program_data.xml",
    "views/portal_templates.xml", 
     

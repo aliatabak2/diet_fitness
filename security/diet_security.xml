@@ -10,4 +10,12 @@
     <field name="category_id" ref="base.module_category_hidden"/>
     <field name="implied_ids" eval="[(4, ref('diet_fitness.group_diet_user'))]"/>
   </record>
+
+   <!-- Portal VIP grubu (Portal’ı da içerir) -->
+    <record id="group_portal_vip" model="res.groups">
+      <field name="name">Portal VIP</field>
+      <field name="category_id" ref="base.module_category_website"/>
+      <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/>
+    </record>
+
 </odoo>

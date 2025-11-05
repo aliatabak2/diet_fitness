@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record id="view_users_form_inherit_vip" model="ir.ui.view">
+      <field name="name">res.users.form.vip.flag</field>
+      <field name="model">res.users</field>
+      <field name="inherit_id" ref="base.view_users_form"/>
+      <field name="arch" type="xml">
+        <!-- Erişim hakları sekmesine kutu -->
+        <xpath expr="//page[@name='access_rights']" position="inside">
+          <group string="VIP">
+            <field name="is_portal_vip"/>
+          </group>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

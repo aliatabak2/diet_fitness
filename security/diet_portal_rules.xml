@@ -1,4 +1,5 @@
 <odoo>
+<data>
   <!-- kullanıcısı kendi üye kaydını görebilsin -->
   <record id="diet_rule_member_portal_own" model="ir.rule">
     <field name="name">Diet Member: Portal Own</field>
@@ -45,5 +46,22 @@
     <field name="perm_write" eval="1"/>
     <field name="perm_create" eval="1"/>
     <field name="perm_unlink" eval="0"/>
+</record>
+  <!-- VIP grup: Portal’ı da içerir -->
+  <record id="group_portal_vip" model="res.groups">
+    <field name="name">VIP Kullanıcı</field>
+    <field name="category_id" ref="base.module_category_website"/> <!-- Ayarlar > Kullanıcı & Web -->
+    <field name="implied_ids" eval="[(4, ref('base.group_portal'))]"/> <!-- Portal haklarını devral -->
   </record>
+
+  <!-- (Opsiyonel) VIP’lere kendi randevularında create/write izni -->
+  <record id="rule_diet_appt_portal_vip" model="ir.rule">
+    <field name="name">VIP: Own Appointments</field>
+    <field name="model_id" ref="model_diet_appointment"/>
+    <field name="domain_force">[('partner_id','=',user.partner_id.id)]</field>
+    
+    <field name="groups" eval="[(4, ref('diet_fitness.group_portal_vip'))]"/>
+  </record>
+
+  </data>
 </odoo>
