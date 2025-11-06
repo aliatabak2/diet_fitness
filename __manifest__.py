@@ -44,6 +44,7 @@
 'assets': {
     'web.assets_frontend': [
         'diet_fitness/static/src/scss/diet_portal.scss',
+        'diet_fitness/static/src/scss/vip_portal.scss',
     ],
 },
 

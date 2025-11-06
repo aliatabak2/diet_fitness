@@ -1,16 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+  <!-- VIP ana sayfa -->
   <template id="portal_my_vip" name="VIP: Portal Home">
     <t t-call="portal.portal_layout">
       <div class="container py-4">
-        <h3 class="mb-3">VIP Hesabım</h3>
-        <p class="text-muted">Hoş geldiniz, <t t-esc="user.name"/>.</p>
-        <!-- Şimdilik standart /my ile aynı içerik yerine basit yer tutucu -->
-        <div class="alert alert-info">
-          Bu alan VIP kullanıcılara özel paneller için ayrılmıştır. 
-          (Örn: Özel randevu slotları, VIP diyet planı, koç mesajları vb.)
+
+        <!-- Başlık -->
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div>
+            <h3 class="mb-1">VIP Hesabım</h3>
+            <p class="text-muted mb-0">Hoş geldiniz, <t t-esc="user.name"/>.</p>
+          </div>
+          <div>
+            <a class="btn btn-outline-secondary btn-sm" href="/my">
+              <i class="fa fa-exchange me-1"/> Standart porta geç
+            </a>
+          </div>
         </div>
-        <a class="btn btn-secondary" href="/my">Standart portala git</a>
+
+        <!-- KPI Kartları -->
+        <div class="row g-3 mb-4">
+          <div class="col-6 col-md-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="text-uppercase text-muted small">Bugünkü Kalori</div>
+                <div class="fs-5 fw-bold"><t t-esc="total_kcal"/> kcal</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="text-uppercase text-muted small">Randevu</div>
+                <div class="fs-5 fw-bold"><t t-esc="appt_count"/></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="text-uppercase text-muted small">Malzeme</div>
+                <div class="fs-5 fw-bold"><t t-esc="pantry_count"/></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <div class="text-uppercase text-muted small">Aktivite</div>
+                <div class="fs-6 fw-semibold">
+                  <t t-if="member and member.activity_level">
+<span t-field="member.activity_level" t-options="{'widget': 'selection'}"/>
+
+                  </t>
+                  <t t-if="not (member and member.activity_level)">—</t>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hızlı İşlemler -->
+        <div class="row g-3 mb-4">
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title mb-2">Günlük Plan</h5>
+                <p class="text-muted small mb-3">Bugünkü öğünlerini görüntüle ya da yeniden oluştur.</p>
+                <div class="d-flex gap-2">
+                  <a class="btn btn-primary btn-sm" href="/my/diet">Aç</a>
+                  <form t-attf-action="/my/diet/plan/#{ plan and plan.id or 0 }/regen" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <button class="btn btn-outline-primary btn-sm" t-att-disabled="not plan">Yenile</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title mb-2">Evdeki Malzemeler</h5>
+                <p class="text-muted small mb-3">Tarif önerileri için kilerin güncel olsun.</p>
+                <a class="btn btn-primary btn-sm" href="/my/diet/pantry">Düzenle</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title mb-2">Randevular</h5>
+                <p class="text-muted small mb-3">Diyetisyen randevularını yönet.</p>
+                <a class="btn btn-primary btn-sm" href="/my/diet/appointments">Görüntüle</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Listeler -->
+        <div class="row g-3">
+          <!-- Bugünkü Öğünler -->
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-header">
+                <strong>Bugünkü Öğünler</strong>
+              </div>
+              <ul class="list-group list-group-flush">
+                <t t-if="plan">
+                  <t t-foreach="plan.meal_line_ids" t-as="ml">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                      <div>
+                        <strong t-esc="ml.meal_type.capitalize()"/> — <t t-esc="ml.recipe_id.name or 'Seçilmedi'"/>
+                        <t t-if="ml.note">
+                          <small class="text-muted ms-2" t-esc="ml.note"/>
+                        </t>
+                      </div>
+                      <span class="badge bg-secondary"><t t-esc="ml.kcal or 0"/> kcal</span>
+                    </li>
+                  </t>
+                  <t t-if="not plan.meal_line_ids">
+                    <li class="list-group-item text-muted">Öğün yok.</li>
+                  </t>
+                </t>
+                <t t-if="not plan">
+                  <li class="list-group-item text-muted">Plan henüz oluşmadı.</li>
+                </t>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Son Randevular -->
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-header">
+                <strong>Son Randevular</strong>
+              </div>
+              <ul class="list-group list-group-flush">
+                <t t-foreach="recent_appts" t-as="a">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                      <strong t-esc="a.name or 'Randevu'"/>
+                      <small class="text-muted ms-2">
+                        <t t-esc="a.date_start"/>
+                      </small>
+                    </div>
+                    <span class="badge bg-light text-dark" t-esc="a.state"/>
+                  </li>
+                </t>
+                <t t-if="not recent_appts">
+                  <li class="list-group-item text-muted">Randevu yok.</li>
+                </t>
+              </ul>
+            </div>
+          </div>
+        </div>
+
       </div>
     </t>
   </template>
