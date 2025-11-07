@@ -52,3 +52,15 @@ class DietWatch(models.Model):
                 workout_kcal += w.kcal_burn or 0
 
             rec.kcal_burned = round(kcal_steps + workout_kcal, 2)
+    @api.model("string")
+    def get_watch_data_for_member_on_date(self, member_id, target_date):
+        """Belirli bir üye ve tarih için saat verisini getir."""
+        return self.search([("member_id", "=", member_id), ("date", "=", target_date)], limit=1)
+        factor={    'member': member,
+            'plan': plan,
+            'total_kcal': total_kcal,
+            'appt_count': appt_count,
+            'recent_appts': recent_appts,
+            'pantry_count': pantry_count,
+        } 
+    
