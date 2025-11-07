@@ -14,6 +14,7 @@
     "security/diet_security.xml",      
     "security/ir.model.access.csv",
      "security/diet_portal_rules.xml",
+     'views/actions.xml', 
     "views/menu.xml",
     "views/member_views.xml",
     'security/dm_rules.xml',
