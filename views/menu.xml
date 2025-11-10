@@ -3,8 +3,8 @@
   <menuitem id="menu_diet_root" name="Diyet &amp; Fitness" sequence="10"/>
 
   <!-- Üyeler / Programlar -->
-  <menuitem id="menu_diet_members"  name="Üyeler"        parent="menu_diet_root" sequence="10" action="action_diet_members"/>
-  <menuitem id="menu_diet_programs" name="Programlar"     parent="menu_diet_root" sequence="20" action="action_diet_programs"/>
+  <menuitem id="menu_diet_members"  name="Üyeler"        parent="menu_diet_root" sequence="10" action= action="diet_fitness.action_diet_members"/>
+  <menuitem id="menu_diet_programs" name="Programlar"     parent="menu_diet_root" sequence="20" action="diet_fitness.action_diet_programs"/>
 
   <!-- Beslenme -->
   <menuitem id="menu_diet_nutrition" name="Beslenme" parent="menu_diet_root" sequence="30"/>

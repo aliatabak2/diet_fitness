@@ -22,6 +22,24 @@
       <field name="res_model">diet.member</field>
       <field name="view_mode">tree,form</field>
     </record>
+<record> id="action_diet_reciepes" model="ir.actions.act_window">
+      <field name="name">Yemek Tarifleri</field>
+      <field name="res_model">diet.recipe</field>
+      <field name="view_mode">tree,form</field>
+    </record>
 
+    <!-- Egzersizler action -->
+    <record id="action_diet_exercises" model="ir.actions.act_window">
+      <field name="name">Egzersizler</field>
+      <field name="res_model">diet.exercise</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Günlük Planlar action -->
+    <record id="action_diet_daily_plans" model="ir.actions.act_window">
+      <field name="name">Günlük Planlar</field>
+      <field name="res_model">diet.daily.plan</field>
+      <field name="view_mode">tree,form</field>
+    </record>
   </data>
 </odoo>
