@@ -22,7 +22,7 @@
       <field name="res_model">diet.member</field>
       <field name="view_mode">tree,form</field>
     </record>
-<record> id="action_diet_reciepes" model="ir.actions.act_window">
+    <record id="action_diet_reciepes" model="ir.actions.act_window">
       <field name="name">Yemek Tarifleri</field>
       <field name="res_model">diet.recipe</field>
       <field name="view_mode">tree,form</field>
